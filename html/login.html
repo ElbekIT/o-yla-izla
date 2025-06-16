@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ro'yxatdan o'tish</title>
+  <style>
+    body {
+      background: #121212;
+      color: white;
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .box {
+      background: #1f1f1f;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #00ff99;
+      text-align: center;
+    }
+
+    input {
+      padding: 10px;
+      margin-top: 15px;
+      width: 100%;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 28px;
+      background: linear-gradient(90deg, #00ff99 0%, #00cfff 100%);
+      border: none;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      color: #121212;
+      font-size: 18px;
+      box-shadow: 0 4px 20px rgba(0,255,153,0.15);
+      transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+      letter-spacing: 1px;
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, #00cfff 0%, #00ff99 100%);
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 8px 32px rgba(0,255,153,0.25);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <h2>a Mantiqiy Testga Kirish</h2>
+    <input type="text" id="username" placeholder="Ismingizni kiriting" />
+    <button onclick="login()">Boshlash</button>
+  </div>
+
+  <script>
+    const existingUser = localStorage.getItem("user");
+    if (existingUser) {
+      window.location.href = "quiz.html";
+    }
+
+    function login() {
+      const username = document.getElementById("username").value.trim();
+      if (username) {
+        localStorage.setItem("user", username);
+        window.location.href = "quiz.html";
+      } else {
+        alert("Iltimos, ismingizni kiriting.");
+      }
+    }
+  </script>
+
+</body>
+</html>

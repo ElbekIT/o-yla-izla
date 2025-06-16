@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mantiqiy Savollar</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+      background: linear-gradient(135deg, #232526 0%, #414345 100%);
+      color: #f4f4f4;
+      padding: 0;
+      margin: 0;
+      min-height: 100vh;
+      letter-spacing: 0.02em;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 32px 8vw 16px 8vw;
+      background: rgba(18,18,18,0.95);
+      box-shadow: 0 2px 16px 0 rgba(0,255,153,0.08);
+      border-bottom: 1.5px solid rgba(0,255,153,0.08);
+    }
+
+    .header h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #00ff99 0%, #00c3ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+      letter-spacing: 0.04em;
+      margin: 0;
+    }
+
+    .username {
+      font-size: 1.1rem;
+      color: #fff;
+      background: #1f1f1f;
+      padding: 12px 22px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      border: 2px solid transparent;
+      background-clip: padding-box;
+      position: relative;
+      z-index: 1;
+      animation: rgb-glow 3s linear infinite;
+      box-shadow: 0 0 24px 0 rgba(0,255,153,0.35);
+      transition: box-shadow 0.3s, border 0.3s;
+      outline: none;
+      user-select: none;
+    }
+
+    .container {
+      max-width: 480px;
+      margin: 48px auto 0 auto;
+      background: rgba(30,30,30,0.98);
+      padding: 36px 32px 32px 32px;
+      border-radius: 18px;
+      text-align: center;
+      box-shadow: 0 8px 32px 0 rgba(0,255,153,0.10), 0 1.5px 0 0 #00ff99;
+      border: 1.5px solid rgba(0,255,153,0.13);
+      backdrop-filter: blur(2px);
+    }
+
+    #question {
+      font-size: 1.25rem;
+      margin-bottom: 18px;
+      font-weight: 500;
+      color: #fff;
+      letter-spacing: 0.01em;
+    }
+
+    input[type="text"] {
+      padding: 14px 16px;
+      width: 85%;
+      border-radius: 8px;
+      border: 1.5px solid #00ff99;
+      background: #181818;
+      color: #fff;
+      font-size: 1.1rem;
+      margin: 12px 0 18px 0;
+      outline: none;
+      transition: border 0.2s, box-shadow 0.2s;
+      box-shadow: 0 2px 8px 0 rgba(0,255,153,0.07);
+    }
+    input[type="text"]:focus {
+      border: 1.5px solid #00c3ff;
+      box-shadow: 0 0 8px #00c3ff44;
+    }
+
+    button {
+      padding: 12px 32px;
+      background: linear-gradient(90deg, #00ff99 0%, #00c3ff 100%);
+      border: none;
+      color: #181818;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      margin-top: 8px;
+      box-shadow: 0 2px 12px 0 rgba(0,255,153,0.13);
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+
+    button:hover, button:focus {
+      background: linear-gradient(90deg, #00c3ff 0%, #00ff99 100%);
+      color: #fff;
+      box-shadow: 0 4px 24px 0 rgba(0,255,153,0.18);
+    }
+
+    #result {
+      margin-top: 16px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      min-height: 28px;
+      letter-spacing: 0.01em;
+    }
+
+    /* Modal styles */
+    .modal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.75);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      backdrop-filter: blur(3px);
+      animation: modalFadeIn 0.3s;
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .modal-content {
+      background: linear-gradient(135deg, #232526 0%, #414345 100%);
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      padding: 40px 48px;
+      border-radius: 20px;
+      text-align: center;
+      border: 2px solid rgba(0,255,153,0.22);
+      color: #fff;
+      min-width: 320px;
+      max-width: 92vw;
+      animation: modalPop 0.3s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+
+    @keyframes modalPop {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-content h3 {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+      font-weight: 600;
+      background: linear-gradient(90deg, #00ff99 0%, #00c3ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+    }
+
+    .modal-content p {
+      color: #eee;
+      margin-bottom: 18px;
+      font-size: 1.05rem;
+    }
+
+    .modal button {
+      margin: 14px 10px 0 10px;
+      padding: 12px 28px;
+      border-radius: 10px;
+      border: none;
+      font-weight: bold;
+      font-size: 1.08rem;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      outline: none;
+      box-shadow: 0 2px 8px 0 rgba(0,255,153,0.10);
+    }
+    .modal button:first-child {
+      background: linear-gradient(90deg, #ff5858 0%, #f09819 100%);
+      color: #fff;
+    }
+    .modal button:last-child {
+      background: #232526;
+      color: #00ff99;
+      border: 1.5px solid #00ff99;
+    }
+    .modal button:hover {
+      filter: brightness(1.08);
+      box-shadow: 0 2px 12px rgba(0,255,153,0.18);
+    }
+
+    /* Username RGB animation */
+    @keyframes rgb-glow {
+      0% {
+        box-shadow: 0 0 24px 0 #ff00cc, 0 0 48px 0 #00ff99;
+        border-color: #ff00cc;
+      }
+      25% {
+        box-shadow: 0 0 24px 0 #00ff99, 0 0 48px 0 #00c3ff;
+        border-color: #00ff99;
+      }
+      50% {
+        box-shadow: 0 0 24px 0 #00c3ff, 0 0 48px 0 #ffe600;
+        border-color: #00c3ff;
+      }
+      75% {
+        box-shadow: 0 0 24px 0 #ffe600, 0 0 48px 0 #ff00cc;
+        border-color: #ffe600;
+      }
+      100% {
+        box-shadow: 0 0 24px 0 #ff00cc, 0 0 48px 0 #00ff99;
+        border-color: #ff00cc;
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .container {
+        padding: 18px 6vw 18px 6vw;
+        border-radius: 12px;
+      }
+      .header {
+        padding: 18px 4vw 10px 4vw;
+      }
+      .modal-content {
+        padding: 24px 8vw;
+        border-radius: 12px;
+        min-width: 0;
+      }
+      .username {
+        padding: 10px 12px;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    
+    <img src="/image/ChatGPT Image Jun 16, 2025, 07_51_35 AM.png" alt="Logo" style="height: 70px; width: 70px; border-radius: 50%; box-shadow: 0 0 12px rgba(0,255,153,0.15);">
+    <a href="#" class="contact-link" onclick="showContactModal(event)" style="color:#00ff99; font-weight:500; text-decoration:none; font-size:1.08rem; margin-left:18px;">Contact us</a>
+    <!-- Contact Modal -->
+    <div class="modal" id="contactModal">
+      <div class="modal-content">
+        <img src="/image/ChatGPT Image Jun 16, 2025, 07_51_35 AM.png" alt="Logo" style="height: 70px; width: 70px; border-radius: 50%; margin-bottom: 18px; box-shadow: 0 0 12px rgba(0,255,153,0.15);">
+        <h3>Aloqa uchun</h3>
+        <a href="tel:+998904063090" style="font-size:1.15rem; font-weight:500; color:#00ff99; text-decoration:none; display:inline-block;">+99890 406 30 90</a>
+        <div style="margin-top:10px; background:#333030; color:#fff; padding:8px 14px; border-radius:8px; font-size:1rem; font-weight:500;">
+          Diqqat! Bu raqam faqat aloqa uchun.
+        </div>
+        <button onclick="closeContactModal()" style="margin-top:18px;">Yopish</button>
+      </div>
+    </div>
+    <script>
+      function showContactModal(e) {
+        e.preventDefault();
+        document.getElementById("contactModal").style.display = "flex";
+      }
+      function closeContactModal() {
+        document.getElementById("contactModal").style.display = "none";
+      }
+    </script>
+
+
+
+
+    <div class="username" onclick="openModal()" id="username-box">Foydalanuvchi</div>
+  </div>
+
+  <div class="container">
+    <p id="question">Savol 1: Ismim bor, lekin odam emasman. Nima bu?</p>
+    <input type="text" id="answer" placeholder="Javobni yozing..." />
+    <br>
+    <button onclick="checkAnswer()">Tekshirish</button>
+    <p id="result"></p>
+  </div>
+
+  <!-- Akkaunt o‘chirish oynasi -->
+  <div class="modal" id="deleteModal">
+    <div class="modal-content">
+      <h3>Akkauntingizni o‘chirmoqchimisiz?</h3>
+      <p>Bu amalni bekor qilib bo‘lmaydi.</p>
+      <button onclick="deleteAccount()">🗑️ Ha, o‘chir</button>
+      <button onclick="closeModal()">❌ Bekor</button>
+    </div>
+  </div>
+
+  <script>
+    // Faqat ro'yxatdan o'tgan foydalanuvchilarga ruxsat
+    const user = localStorage.getItem("user");
+    if (!user) {
+      alert("Iltimos, avval ro‘yxatdan o‘ting.");
+      window.location.href = "../index.html";
+    }
+
+    document.getElementById("username-box").textContent = user;
+
+    const questions = [
+      { question: "Ismim bor, lekin odam emasman. Nima bu?", answer: "kitob" },
+      { question: "Otamning o‘g‘li, lekin uka emas. Kim bu?", answer: "men" },
+      { question: "Kunduzi yashirinadi, kechasi ko‘rinadi, nur bermaydi. Bu nima?", answer: "oy" }
+    ];
+
+    let current = 0;
+    let correct = 0;
+
+    function checkAnswer() {
+      const userAnswer = document.getElementById("answer").value.trim().toLowerCase();
+      const correctAnswer = questions[current].answer;
+      const result = document.getElementById("result");
+
+      if (userAnswer === correctAnswer) {
+        result.textContent = "✅ To‘g‘ri!";
+        result.style.color = "#00ff99";
+        correct++;
+      } else {
+        result.textContent = "❌ Noto‘g‘ri. Yana urinib ko‘ring.";
+        result.style.color = "#ff4444";
+        return;
+      }
+
+      setTimeout(() => {
+        current++;
+        if (current < questions.length) {
+          document.getElementById("question").textContent = "Savol " + (current + 1) + ": " + questions[current].question;
+          document.getElementById("answer").value = "";
+          result.textContent = "";
+        } else {
+          document.querySelector(".container").innerHTML = `
+            <h2>Tabriklaymiz, ${user}!</h2>
+            <p>Siz ${correct} ta savolga to‘g‘ri javob berdingiz.</p>
+            <button onclick="location.reload()">Qaytadan boshlash</button>
+          `;
+        }
+      }, 1000);
+    }
+
+    function openModal() {
+      document.getElementById("deleteModal").style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById("deleteModal").style.display = "none";
+    }
+
+    function deleteAccount() {
+      localStorage.clear();
+      window.location.href = "../index.html";
+    }
+  </script>
+
+</body>
+</html>
