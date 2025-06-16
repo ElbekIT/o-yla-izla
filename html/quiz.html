@@ -23,8 +23,6 @@
       background: rgba(18,18,18,0.95);
       box-shadow: 0 2px 16px 0 rgba(0,255,153,0.08);
       border-bottom: 1.5px solid rgba(0,255,153,0.08);
-      flex-wrap: wrap;
-      gap: 12px;
     }
 
     .header h1 {
@@ -56,7 +54,6 @@
       transition: box-shadow 0.3s, border 0.3s;
       outline: none;
       user-select: none;
-      white-space: nowrap;
     }
 
     .container {
@@ -208,102 +205,44 @@
     /* Username RGB animation */
     @keyframes rgb-glow {
       0% {
-      box-shadow: 0 0 24px 0 #ff00cc, 0 0 48px 0 #00ff99;
-      border-color: #ff00cc;
+        box-shadow: 0 0 24px 0 #ff00cc, 0 0 48px 0 #00ff99;
+        border-color: #ff00cc;
       }
       25% {
-      box-shadow: 0 0 24px 0 #00ff99, 0 0 48px 0 #00c3ff;
-      border-color: #00ff99;
+        box-shadow: 0 0 24px 0 #00ff99, 0 0 48px 0 #00c3ff;
+        border-color: #00ff99;
       }
       50% {
-      box-shadow: 0 0 24px 0 #00c3ff, 0 0 48px 0 #ffe600;
-      border-color: #00c3ff;
+        box-shadow: 0 0 24px 0 #00c3ff, 0 0 48px 0 #ffe600;
+        border-color: #00c3ff;
       }
       75% {
-      box-shadow: 0 0 24px 0 #ffe600, 0 0 48px 0 #ff00cc;
-      border-color: #ffe600;
+        box-shadow: 0 0 24px 0 #ffe600, 0 0 48px 0 #ff00cc;
+        border-color: #ffe600;
       }
       100% {
-      box-shadow: 0 0 24px 0 #ff00cc, 0 0 48px 0 #00ff99;
-      border-color: #ff00cc;
+        box-shadow: 0 0 24px 0 #ff00cc, 0 0 48px 0 #00ff99;
+        border-color: #ff00cc;
       }
     }
 
-    /* Responsive for all devices */
-    @media (max-width: 900px) {
-      .container {
-      max-width: 98vw;
-      padding: 24px 4vw 24px 4vw;
-      }
-      .header {
-      padding: 18px 4vw 10px 4vw;
-      }
-      .modal-content {
-      padding: 24px 6vw;
-      border-radius: 14px;
-      min-width: 0;
-      }
-    }
-
+    /* Responsive */
     @media (max-width: 600px) {
       .container {
-      padding: 18px 3vw 18px 3vw;
-      border-radius: 10px;
+        padding: 18px 6vw 18px 6vw;
+        border-radius: 12px;
       }
       .header {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 10px;
-      padding: 12px 2vw 8px 2vw;
+        padding: 18px 4vw 10px 4vw;
       }
       .modal-content {
-      padding: 16px 2vw;
-      border-radius: 8px;
-      min-width: 0;
+        padding: 24px 8vw;
+        border-radius: 12px;
+        min-width: 0;
       }
       .username {
-      padding: 8px 8px;
-      font-size: 0.98rem;
-      }
-      input[type="text"] {
-      width: 98%;
-      font-size: 1rem;
-      }
-      button {
-      width: 100%;
-      font-size: 1rem;
-      padding: 10px 0;
-      }
-    }
-
-    /* iPhone X, iPhone 12, iPad, etc. */
-    @media (max-width: 430px) {
-      .container {
-      padding: 10px 1vw 10px 1vw;
-      }
-      .modal-content {
-      padding: 10px 1vw;
-      }
-      .header img {
-      height: 48px !important;
-      width: 48px !important;
-      }
-    }
-
-    @media (max-width: 375px) {
-      .container {
-      padding: 4px 0.5vw 4px 0.5vw;
-      }
-      .modal-content {
-      padding: 6px 0.5vw;
-      }
-      .header img {
-      height: 38px !important;
-      width: 38px !important;
-      }
-      .username {
-      font-size: 0.9rem;
-      padding: 6px 4px;
+        padding: 10px 12px;
+        font-size: 1rem;
       }
     }
   </style>
