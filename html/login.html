@@ -22,6 +22,9 @@
       border-radius: 10px;
       box-shadow: 0 0 15px #00ff99;
       text-align: center;
+      width: 100%;
+      max-width: 350px;
+      box-sizing: border-box;
     }
 
     input {
@@ -31,6 +34,7 @@
       border: none;
       border-radius: 6px;
       font-size: 16px;
+      box-sizing: border-box;
     }
 
     button {
@@ -46,12 +50,28 @@
       box-shadow: 0 4px 20px rgba(0,255,153,0.15);
       transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
       letter-spacing: 1px;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     button:hover {
       background: linear-gradient(90deg, #00cfff 0%, #00ff99 100%);
       transform: translateY(-2px) scale(1.03);
       box-shadow: 0 8px 32px rgba(0,255,153,0.25);
+    }
+
+    @media (max-width: 500px) {
+      .box {
+      padding: 18px;
+      max-width: 95vw;
+      }
+      input, button {
+      font-size: 15px;
+      padding: 10px;
+      }
+      h2 {
+      font-size: 20px;
+      }
     }
   </style>
 </head>
